@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Altéra Systems — Tableau de bord budgétaire T4 2026</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Altéra Systems <span>Tableau de bord budgétaire · T4 2026</span></h1>
+    </div>
+    <div class="controls">
+      <div class="seg" id="periodSeg"></div>
+      <button class="btn" id="themeBtn">☀️ / 🌙</button>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>📦 Produits commercialisés</h2>
+    <p class="hint">Clique sur un produit pour filtrer la section « Acquisitions clients » ci-dessous.</p>
+    <div class="pgrid" id="products"></div>
+  </section>
+
+  <section id="alert"></section>
+  <section class="kpis" id="kpis"></section>
+
+  <section class="grid2">
+    <div class="card">
+      <div class="card-h"><h2>Comparaison sur 3 mois</h2><div class="seg" id="metricSeg"></div></div>
+      <div class="legend" id="legMain"></div>
+      <div class="chart" id="chartMain"></div>
+    </div>
+    <div style="display:grid;gap:18px">
+      <div class="card">
+        <h2>🚦 Jauge du seuil d’alerte</h2>
+        <p class="hint">Bénéfice d’octobre : réel vs prévu vs seuil de déficit</p>
+        <div id="gauge"></div>
+      </div>
+      <div class="card">
+        <h2>Dépenses par poste</h2>
+        <p class="hint" id="catHint"></p>
+        <div id="cats"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-h">
+      <div><h2>🎛️ Simulateur — Novembre &amp; Décembre</h2><p class="hint">Fais varier la performance commerciale et les dépenses : le seuil d’alerte est testé en direct.</p></div>
+      <div class="presets" id="presets"></div>
+    </div>
+    <div class="sim">
+      <div>
+        <label>Réalisation du CA prévu <output id="rateOut"></output><input type="range" id="rate" min="40" max="120" value="88"></label>
+        <label>Écart sur les dépenses prévues <output id="overOut"></output><input type="range" id="over" min="-10" max="30" value="6"></label>
+        <div class="tiles" id="simTiles"></div>
+        <div id="simAlert"></div>
+      </div>
+      <div><div class="legend" id="legSim"></div><div class="chart" id="chartSim"></div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-h">
+      <div><h2>👥 Progression des acquisitions clients &amp; coût d’acquisition</h2><p class="hint" id="acqHint"></p></div>
+      <div class="seg" id="prodSeg"></div>
+    </div>
+    <div class="acqstats" id="acqStats"></div>
+    <div class="grid2e">
+      <div><h3>Nouveaux clients par mois</h3><div class="legend" id="leg2"></div><div class="chart" id="chartCl"></div></div>
+      <div><h3>Coût d’acquisition total par mois</h3><div class="legend" id="leg3"></div><div class="chart" id="chartCost"></div></div>
+    </div>
+    <div class="tablewrap" id="cacTable"></div>
+  </section>
+
+  <section class="card">
+    <h2>📋 Tableau récapitulatif T4 2026</h2>
+    <div class="tablewrap" id="recap"></div>
+  </section>
+
+  <footer>Données fictives de démonstration · Altéra Systems · Réel disponible pour octobre uniquement (au 25/10/2026)</footer>
+</div>
+<div id="tip"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
