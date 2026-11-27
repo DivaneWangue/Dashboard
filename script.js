@@ -19,7 +19,7 @@ const P=[
   {id:'data',nom:'DataLens Analytics',type:'Licence BI · logiciel',emoji:'📊',color:'#c084fc',
    ca:{prev:[27000,34000,40000],reel:[24000,null,null]},cl:{prev:[10,12,16],reel:[9,null,null]},cac:{prev:[800,780,750],reel:[820,null,null]}}
 ];
-const state={period:'0',metric:'ca',product:'all',rate:88,over:6};
+const state={period:'0',metric:'ca',product:'all',rate:100,expenseRate:100};
 
 /* ============ OUTILS ============ */
 const $=s=>document.querySelector(s);
@@ -141,11 +141,11 @@ function renderCats(){
 
 /* ============ SIMULATEUR ============ */
 function renderSim(){
-  const r=state.rate/100,o=state.over/100;
+  const r=state.rate/100,o=state.expenseRate/100;
   $('#rateOut').textContent=state.rate+' %';
-  $('#overOut').textContent=(state.over>0?'+':'')+state.over+' %';
+  $('#expenseRateOut').textContent=state.expenseRate+' %';
   const ca=[D.ca.reel[0],D.ca.prev[1]*r,D.ca.prev[2]*r];
-  const dep=[D.dep.reel[0],D.dep.prev[1]*(1+o),D.dep.prev[2]*(1+o)];
+  const dep=[D.dep.reel[0],D.dep.prev[1]*o,D.dep.prev[2]*o];
   const ben=ca.map((c,i)=>c-dep[i]);
   const run=[ben[0],ben[0]+ben[1],ben[0]+ben[1]+ben[2]];
   const cum=run[2],cumPrev=sum(D.ben.prev),worst=Math.min(...ben,...run);
@@ -163,10 +163,10 @@ function renderSim(){
 }
 function initSim(){
   $('#rate').oninput=e=>{state.rate=+e.target.value;renderSim();};
-  $('#over').oninput=e=>{state.over=+e.target.value;renderSim();};
-  const PR=[['Tendance actuelle',88,6],['Optimiste',100,0],['Pessimiste',70,15],['Crise',50,25]];
+  $('#expenseRate').oninput=e=>{state.expenseRate=+e.target.value;renderSim();};
+  const PR=[['Tendance actuelle',88,106],['Optimiste',100,100],['Pessimiste',70,115],['Crise',50,125]];
   $('#presets').innerHTML=PR.map((p,i)=>`<button data-i="${i}">${p[0]}</button>`).join('');
-  $('#presets').onclick=e=>{const b=e.target.closest('button');if(!b)return;const p=PR[+b.dataset.i];state.rate=p[1];state.over=p[2];$('#rate').value=p[1];$('#over').value=p[2];renderSim();};
+  $('#presets').onclick=e=>{const b=e.target.closest('button');if(!b)return;const p=PR[+b.dataset.i];state.rate=p[1];state.expenseRate=p[2];$('#rate').value=p[1];$('#expenseRate').value=p[2];renderSim();};
 }
 
 /* ============ PRODUITS ============ */
